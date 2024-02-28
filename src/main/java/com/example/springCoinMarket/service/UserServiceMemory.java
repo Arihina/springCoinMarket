@@ -1,7 +1,7 @@
 package com.example.springCoinMarket.service;
 
 import com.example.springCoinMarket.dao.model.User;
-import com.example.springCoinMarket.repository.UserMemoryRepository;
+import com.example.springCoinMarket.dao.repository.UserMemoryRepository;
 
 import java.util.HashMap;
 

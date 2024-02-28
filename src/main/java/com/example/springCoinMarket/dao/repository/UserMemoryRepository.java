@@ -1,4 +1,4 @@
-package com.example.springCoinMarket.repository;
+package com.example.springCoinMarket.dao.repository;
 
 import com.example.springCoinMarket.dao.model.User;
 import org.springframework.stereotype.Repository;

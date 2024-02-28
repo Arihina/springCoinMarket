@@ -3,6 +3,7 @@ package com.example.springCoinMarket.controller;
 import com.example.springCoinMarket.dao.model.User;
 import com.example.springCoinMarket.service.UserService;
 import com.example.springCoinMarket.service.UserServiceMemory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class UserController {
         service = new UserServiceMemory();
     }
 
-    @GetMapping("/users")
+    @GetMapping("/user")
     public HashMap<Integer, User> getUsers() {
         return service.getUsers();
     }
@@ -26,11 +27,12 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable int id) {
         service.deleteUser(id);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/user/{id}")
     public User getUser(@PathVariable int id) {
         return service.getUser(id);
     }
