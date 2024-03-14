@@ -1,7 +1,7 @@
 # Digital currency exchange 
 ## functional requirements of the project
 - User registration
-- Viewing assets in the user's wallet
+- Viewing assets in the userDao's wallet
 - Transfer of assets between users
 - Putting assets up for sale
 - Submitting an application for the purchase of assets

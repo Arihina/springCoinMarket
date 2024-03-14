@@ -1,16 +1,16 @@
 package com.example.springCoinMarket.dao.repository;
 
-import com.example.springCoinMarket.dao.model.User;
+import com.example.springCoinMarket.dao.model.UserDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 
 @Repository
 public class UserMemoryRepository {
-    private final HashMap<Integer, User> users = new HashMap<>();
+    private final HashMap<Integer, UserDao> users = new HashMap<>();
 
 
-    public HashMap<Integer, User> getUsers() {
+    public HashMap<Integer, UserDao> getUsers() {
         return users;
     }
 
@@ -20,20 +20,20 @@ public class UserMemoryRepository {
         }
     }
 
-    public User getUser(int id) {
+    public UserDao getUser(int id) {
         if (users.get(id) != null) {
             return users.get(id);
         }
         return null;
     }
 
-    public void updateUser(User user) {
-        if (users.get(user.getUserID()) != null) {
-            users.put(user.getUserID(), user);
+    public void updateUser(UserDao userDao) {
+        if (users.get(userDao.getId()) != null) {
+            users.put(userDao.getId(), userDao);
         }
     }
 
-    public void registerUser(User newUser) {
-        users.put(newUser.getUserID(), newUser);
+    public void registerUser(UserDao newUserDao) {
+        users.put(newUserDao.getId(), newUserDao);
     }
 }

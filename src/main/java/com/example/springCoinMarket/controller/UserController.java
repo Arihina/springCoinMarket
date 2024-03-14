@@ -1,6 +1,6 @@
 package com.example.springCoinMarket.controller;
 
-import com.example.springCoinMarket.dao.model.User;
+import com.example.springCoinMarket.dao.model.UserDao;
 import com.example.springCoinMarket.service.UserService;
 import com.example.springCoinMarket.service.UserServiceMemory;
 import org.springframework.http.HttpStatus;
@@ -17,13 +17,13 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public HashMap<Integer, User> getUsers() {
+    public HashMap<Integer, String> getUsers() {
         return service.getUsers();
     }
 
     @PostMapping("/registration")
-    public void registerUser(@RequestBody User user) {
-        service.registerUser(user);
+    public void registerUser(@RequestBody UserDao userDao) {
+        service.registerUser(userDao);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -33,13 +33,13 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable int id) {
+    public String getUser(@PathVariable int id) {
         return service.getUser(id);
     }
 
     @PutMapping("/update")
-    public void updateUser(@RequestBody User user) {
-        service.updateUser(user);
+    public void updateUser(@RequestBody UserDao userDao) {
+        service.updateUser(userDao);
     }
 
 }

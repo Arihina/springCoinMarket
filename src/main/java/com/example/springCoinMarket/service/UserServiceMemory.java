@@ -1,7 +1,8 @@
 package com.example.springCoinMarket.service;
 
-import com.example.springCoinMarket.dao.model.User;
+import com.example.springCoinMarket.dao.model.UserDao;
 import com.example.springCoinMarket.dao.repository.UserMemoryRepository;
+import com.example.springCoinMarket.dto.UserDto;
 
 import java.util.HashMap;
 
@@ -13,8 +14,24 @@ public class UserServiceMemory implements UserService {
     }
 
     @Override
-    public HashMap<Integer, User> getUsers() {
-        return repository.getUsers();
+    public HashMap<Integer, String> getUsers() {
+        HashMap<Integer, UserDao> usersDao = repository.getUsers();
+        HashMap<Integer, String> usersInfo = new HashMap<>();
+
+        for (Integer key: usersDao.keySet())
+        {
+            String info = String.format(
+                    """
+                    name: %s
+                    id: %d
+                    wallet id: %d
+                    """,
+                    usersDao.get(key).getName(), usersDao.get(key).getId(), usersDao.get(key).getWalletId());
+
+            usersInfo.put(key, info);
+        }
+
+        return usersInfo;
     }
 
     @Override
@@ -23,17 +40,28 @@ public class UserServiceMemory implements UserService {
     }
 
     @Override
-    public User getUser(int id) {
-        return repository.getUser(id);
+    public String getUser(int id) {
+        UserDao userDao = repository.getUser(id);
+        UserDto userDto = UserDto.builder()
+                .name(userDao.getName())
+                .id(userDao.getId())
+                .walletId(userDao.getWalletId())
+                .build();
+
+        return String.format("""
+                name: %s
+                id: %d
+                wallet id: %d
+                """, userDto.getName(), userDto.getId(), userDto.getWalletId());
     }
 
     @Override
-    public void updateUser(User user) {
-        repository.updateUser(user);
+    public void updateUser(UserDao userDao) {
+        repository.updateUser(userDao);
     }
 
     @Override
-    public void registerUser(User newUser) {
-        repository.registerUser(newUser);
+    public void registerUser(UserDao newUserDao) {
+        repository.registerUser(newUserDao);
     }
 }
