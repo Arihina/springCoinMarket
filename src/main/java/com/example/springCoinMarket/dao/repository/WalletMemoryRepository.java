@@ -1,6 +1,5 @@
 package com.example.springCoinMarket.dao.repository;
 
-import com.example.springCoinMarket.dao.model.UserDao;
 import com.example.springCoinMarket.dao.model.WalletDao;
 import org.springframework.stereotype.Repository;
 
