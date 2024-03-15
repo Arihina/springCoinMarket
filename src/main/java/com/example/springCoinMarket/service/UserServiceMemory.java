@@ -18,14 +18,13 @@ public class UserServiceMemory implements UserService {
         HashMap<Integer, UserDao> usersDao = repository.getUsers();
         HashMap<Integer, String> usersInfo = new HashMap<>();
 
-        for (Integer key: usersDao.keySet())
-        {
+        for (Integer key : usersDao.keySet()) {
             String info = String.format(
                     """
-                    name: %s
-                    id: %d
-                    wallet id: %d
-                    """,
+                            name: %s
+                            id: %d
+                            wallet id: %d
+                            """,
                     usersDao.get(key).getName(), usersDao.get(key).getId(), usersDao.get(key).getWalletId());
 
             usersInfo.put(key, info);
