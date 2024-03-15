@@ -21,20 +21,28 @@ public class WalletServiceMemory implements WalletService {
         HashMap<Integer, String> walletsInfo = new HashMap<>();
 
         for (Integer key : walletsDao.keySet()) {
-            String coins = "";
-            for (Integer coin : walletsDao.get(key).getCoinsId()) {
-                coins += coin.toString() + " ";
+            if (walletsDao.get(key).getCoinsId() != null) {
+                StringBuilder coins = new StringBuilder();
+                for (Integer coin : walletsDao.get(key).getCoinsId()) {
+                    coins.append(" ").append(coin.toString()).append(" ");
+                }
+
+                String info = String.format("""
+                                user id: %d
+                                id: %d
+                                coins id: %s""",
+                        walletsDao.get(key).getUserId(), walletsDao.get(key).getId(), coins.toString());
+
+                walletsInfo.put(key, info);
+            } else {
+                String info = String.format("""
+                                user id: %d
+                                id: %d
+                                coins id: no coins in wallet""",
+                        walletsDao.get(key).getUserId(), walletsDao.get(key).getId());
+
+                walletsInfo.put(key, info);
             }
-
-            String info = String.format(
-                    """
-                                    user id: %d
-                                    id: %d
-                                    coins id: %s
-                            """,
-                    walletsDao.get(key).getUserId(), walletsDao.get(key).getId(), coins);
-
-            walletsInfo.put(key, info);
         }
 
         return walletsInfo;
@@ -43,21 +51,45 @@ public class WalletServiceMemory implements WalletService {
     @Override
     public String getWallet(int id) {
         WalletDao walletDao = repository.getWallet(id);
+
+
         WalletDto walletDto = WalletDto.builder()
                 .userId(walletDao.getUserId())
                 .coinsId(walletDao.getCoinsId())
                 .build();
 
+
         var coins = walletDto.getCoinsId();
-        String coinsInfo = "";
-        for (var coin : coins) {
-            coinsInfo += coin.toString() + " ";
+
+
+        if (coins != null) {
+            StringBuilder coinsInfo = new StringBuilder();
+            for (var coin : coins) {
+                coinsInfo.append(coin.toString()).append(" ");
+            }
+
+
+            return String.format("""
+                    user id: %d
+                    coins id: %s
+                    """, walletDto.getUserId(), coinsInfo.toString()
+            );
+        } else {
+            return String.format("""
+                    user id: %d
+                    coins id: no coins in wallet
+                    """, walletDto.getUserId());
         }
 
-        return String.format("""
-                user id: %d,
-                coins id: %s
-                """, walletDto.getUserId(), coinsInfo
-        );
+    }
+
+    @Override
+    public void createWallet(WalletDao walletDao) {
+        repository.setWallet(walletDao);
+    }
+
+    @Override
+    public void deleteWallet(int id) {
+        repository.deleteWallet(id);
     }
 }

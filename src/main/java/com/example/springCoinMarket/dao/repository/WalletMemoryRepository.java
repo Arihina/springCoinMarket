@@ -22,4 +22,14 @@ public class WalletMemoryRepository {
         }
         return null;
     }
+
+    public void setWallet(WalletDao walletDao) {
+        wallets.put(walletDao.getId(), walletDao);
+    }
+
+    public void deleteWallet(int id) {
+        if (wallets.get(id) != null) {
+            wallets.remove(id);
+        }
+    }
 }

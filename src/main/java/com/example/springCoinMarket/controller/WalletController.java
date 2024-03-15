@@ -1,10 +1,10 @@
 package com.example.springCoinMarket.controller;
 
+import com.example.springCoinMarket.dao.model.WalletDao;
 import com.example.springCoinMarket.service.WalletService;
 import com.example.springCoinMarket.service.WalletServiceMemory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -26,5 +26,16 @@ public class WalletController {
     @GetMapping("wallet/{id}")
     public String getWallet(@PathVariable int id) {
         return  service.getWallet(id);
+    }
+
+    @PostMapping("/wallet/create")
+    public void createWallet(@RequestBody WalletDao walletDao) {
+        service.createWallet(walletDao);
+    }
+
+    @DeleteMapping("/wallet/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteWallet(@PathVariable int id) {
+        service.deleteWallet(id);
     }
 }
