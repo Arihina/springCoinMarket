@@ -1,7 +1,8 @@
 package com.example.springCoinMarket.controller;
 
 import com.example.springCoinMarket.dao.model.UserDao;
-import com.example.springCoinMarket.dao.model.WalletDao;
+import com.example.springCoinMarket.dto.UserDto;
+import com.example.springCoinMarket.dto.WalletDto;
 import com.example.springCoinMarket.service.UserService;
 import com.example.springCoinMarket.service.UserServiceMemory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,34 +22,32 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public HashMap<Integer, String> getUsers() {
+    public HashMap<Integer, UserDto> getUsers() {
         return service.getUsers();
     }
 
     @PostMapping("/registration")
-    public void registerUser(@RequestBody UserDao userDao) {
-        service.registerUser(userDao);
-        walletController.createWallet(new WalletDao(userDao.getId(), userDao.getWalletId(), null, null));
+    public void registerUser(@RequestBody UserDto userDto) {
+        service.registerUser(userDto);
+        walletController.createWallet(WalletDto.builder().
+                userId(userDto.getId()).walletId(userDto.getWalletId()).coinsId(null).build());
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable int id) {
-        var params = getUser(id).split(":");
-        int walletId = Integer.parseInt(params[params.length - 1].replace("\n", "").replace(" ", ""));
-
-        walletController.deleteWallet(walletId);
+        walletController.deleteWallet(getUser(id).getWalletId());
         service.deleteUser(id);
     }
 
     @GetMapping("/user/{id}")
-    public String getUser(@PathVariable int id) {
+    public UserDto getUser(@PathVariable int id) {
         return service.getUser(id);
     }
 
     @PutMapping("/update")
-    public void updateUser(@RequestBody UserDao userDao) {
-        service.updateUser(userDao);
+    public void updateUser(@RequestBody UserDto userDto) {
+        service.updateUser(userDto);
     }
 
 }

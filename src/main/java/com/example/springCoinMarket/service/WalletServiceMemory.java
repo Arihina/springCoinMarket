@@ -1,6 +1,7 @@
 package com.example.springCoinMarket.service;
 
 import com.example.springCoinMarket.dao.model.WalletDao;
+import com.example.springCoinMarket.dao.repository.CoinMemoryRepository;
 import com.example.springCoinMarket.dao.repository.WalletMemoryRepository;
 import com.example.springCoinMarket.dto.WalletDto;
 import org.springframework.stereotype.Service;
@@ -10,81 +11,53 @@ import java.util.HashMap;
 @Service
 public class WalletServiceMemory implements WalletService {
     private final WalletMemoryRepository repository;
+    private CoinMemoryRepository coinRepository;
 
     public WalletServiceMemory() {
         repository = new WalletMemoryRepository();
     }
 
     @Override
-    public HashMap<Integer, String> getWallets() {
+    public HashMap<Integer, WalletDto> getWallets() {
         HashMap<Integer, WalletDao> walletsDao = repository.getWallets();
-        HashMap<Integer, String> walletsInfo = new HashMap<>();
+        HashMap<Integer, WalletDto> walletsDto = new HashMap<>();
 
         for (Integer key : walletsDao.keySet()) {
+            WalletDto modelDto = WalletDto.builder()
+                    .walletId(walletsDao.get(key).getId())
+                    .userId(walletsDao.get(key).getUserId())
+                    .build();
+
             if (walletsDao.get(key).getCoinsId() != null) {
-                StringBuilder coins = new StringBuilder();
                 for (Integer coin : walletsDao.get(key).getCoinsId()) {
-                    coins.append(" ").append(coin.toString()).append(" ");
+                    modelDto.getCoinsId().add(coinRepository.getCoin(coin).getId());
                 }
-
-                String info = String.format("""
-                                user id: %d
-                                id: %d
-                                coins id: %s""",
-                        walletsDao.get(key).getUserId(), walletsDao.get(key).getId(), coins.toString());
-
-                walletsInfo.put(key, info);
-            } else {
-                String info = String.format("""
-                                user id: %d
-                                id: %d
-                                coins id: no coins in wallet""",
-                        walletsDao.get(key).getUserId(), walletsDao.get(key).getId());
-
-                walletsInfo.put(key, info);
             }
+            walletsDto.put(key, modelDto);
+
         }
 
-        return walletsInfo;
+        return walletsDto;
     }
 
     @Override
-    public String getWallet(int id) {
+    public WalletDto getWallet(int id) {
         WalletDao walletDao = repository.getWallet(id);
 
-
-        WalletDto walletDto = WalletDto.builder()
+        return WalletDto.builder()
                 .userId(walletDao.getUserId())
                 .coinsId(walletDao.getCoinsId())
                 .build();
-
-
-        var coins = walletDto.getCoinsId();
-
-
-        if (coins != null) {
-            StringBuilder coinsInfo = new StringBuilder();
-            for (var coin : coins) {
-                coinsInfo.append(coin.toString()).append(" ");
-            }
-
-
-            return String.format("""
-                    user id: %d
-                    coins id: %s
-                    """, walletDto.getUserId(), coinsInfo.toString()
-            );
-        } else {
-            return String.format("""
-                    user id: %d
-                    coins id: no coins in wallet
-                    """, walletDto.getUserId());
-        }
-
     }
 
     @Override
-    public void createWallet(WalletDao walletDao) {
+    public void createWallet(WalletDto walletDto) {
+        WalletDao walletDao = new WalletDao();
+        walletDao.setId(walletDto.getWalletId());
+        walletDao.setUserId(walletDto.getUserId());
+        walletDao.setCoinsId(null);
+        walletDao.setTransactionsId(null);
+
         repository.setWallet(walletDao);
     }
 

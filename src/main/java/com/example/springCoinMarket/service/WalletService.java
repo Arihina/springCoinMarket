@@ -1,15 +1,16 @@
 package com.example.springCoinMarket.service;
 
 import com.example.springCoinMarket.dao.model.WalletDao;
+import com.example.springCoinMarket.dto.WalletDto;
 
 import java.util.HashMap;
 
 public interface WalletService {
 
-    HashMap<Integer, String> getWallets();
-    String getWallet(int id);
+    HashMap<Integer, WalletDto> getWallets();
+    WalletDto getWallet(int id);
 
-    void createWallet(WalletDao walletDao);
+    void createWallet(WalletDto WalletDao);
 
     void deleteWallet(int id);
 }

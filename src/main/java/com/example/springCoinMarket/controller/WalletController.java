@@ -1,6 +1,7 @@
 package com.example.springCoinMarket.controller;
 
 import com.example.springCoinMarket.dao.model.WalletDao;
+import com.example.springCoinMarket.dto.WalletDto;
 import com.example.springCoinMarket.service.WalletService;
 import com.example.springCoinMarket.service.WalletServiceMemory;
 import org.springframework.http.HttpStatus;
@@ -18,19 +19,19 @@ public class WalletController {
     }
 
     @GetMapping("/wallet")
-    public HashMap<Integer, String> getWallets()
+    public HashMap<Integer, WalletDto> getWallets()
     {
         return service.getWallets();
     }
 
     @GetMapping("wallet/{id}")
-    public String getWallet(@PathVariable int id) {
+    public WalletDto getWallet(@PathVariable int id) {
         return  service.getWallet(id);
     }
 
     @PostMapping("/wallet/create")
-    public void createWallet(@RequestBody WalletDao walletDao) {
-        service.createWallet(walletDao);
+    public void createWallet(@RequestBody WalletDto walletDto) {
+        service.createWallet(walletDto);
     }
 
     @DeleteMapping("/wallet/delete/{id}")
