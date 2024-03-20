@@ -20,12 +20,12 @@ public class BalanceController {
     }
 
     @PutMapping("/cash_in")
-    public void cashIn(@RequestBody CoinDto coinDto, int walletId) {
+    public void cashIn(@RequestBody CoinDto coinDto, Integer walletId) {
         service.cashIn(coinDto, walletController.getWallet(walletId));
     }
 
     @PutMapping("/cash_out")
-    public void cashOut(@RequestBody CoinDto coinDto, int walletId) {
+    public void cashOut(@RequestBody CoinDto coinDto, Integer walletId) {
         service.cashOut(coinDto, walletController.getWallet(walletId));
     }
 }

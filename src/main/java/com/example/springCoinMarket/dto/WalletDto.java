@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Getter
 @AllArgsConstructor
 public class WalletDto {
-    private int walletId;
-    private int userId;
-    private ArrayList<Integer> coinsId;
+    private Integer walletId;
+    private Integer userId;
+    private List<Integer> coinsIds;
 }

@@ -21,7 +21,7 @@ public class CoinController {
     }
 
     @GetMapping("/coin/{id}")
-    public CoinDto getCoin(@PathVariable int id) {
+    public CoinDto getCoin(@PathVariable Integer id) {
         return service.getCoin(id);
     }
 

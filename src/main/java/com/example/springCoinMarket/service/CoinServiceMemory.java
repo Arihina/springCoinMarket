@@ -1,12 +1,11 @@
 package com.example.springCoinMarket.service;
 
-import com.example.springCoinMarket.dao.model.CoinDao;
+import com.example.springCoinMarket.dao.model.Coin;
 import com.example.springCoinMarket.dao.repository.CoinMemoryRepository;
 import com.example.springCoinMarket.dto.CoinDto;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.Locale;
 
 @Service
 public class CoinServiceMemory implements CoinService {
@@ -19,7 +18,7 @@ public class CoinServiceMemory implements CoinService {
     @Override
     public HashMap<Integer, CoinDto> getCoins() {
         HashMap<Integer, CoinDto> coinsDto = new HashMap<>();
-        HashMap<Integer, CoinDao> coinsDao = repository.getCoins();
+        HashMap<Integer, Coin> coinsDao = repository.getCoins();
 
         for (Integer key : coinsDao.keySet()) {
             CoinDto modelDto = CoinDto.builder()
@@ -35,7 +34,7 @@ public class CoinServiceMemory implements CoinService {
     }
 
     @Override
-    public CoinDto getCoin(int id) {
+    public CoinDto getCoin(Integer id) {
         var modelDao = repository.getCoin(id);
 
         CoinDto modelDto = CoinDto.builder()
@@ -49,11 +48,11 @@ public class CoinServiceMemory implements CoinService {
 
     @Override
     public void addCoin(CoinDto coinDto) {
-        CoinDao coinDao = new CoinDao();
-        coinDao.setId(coinDto.getId());
-        coinDao.setCurrency(coinDto.getCurrency());
-        coinDao.setQuantity(coinDto.getQuantity());
+        Coin coin = new Coin();
+        coin.setId(coinDto.getId());
+        coin.setCurrency(coinDto.getCurrency());
+        coin.setQuantity(coinDto.getQuantity());
 
-        repository.addCoin(coinDao);
+        repository.addCoin(coin);
     }
 }

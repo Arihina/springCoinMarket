@@ -1,6 +1,5 @@
 package com.example.springCoinMarket.controller;
 
-import com.example.springCoinMarket.dao.model.WalletDao;
 import com.example.springCoinMarket.dto.WalletDto;
 import com.example.springCoinMarket.service.WalletService;
 import com.example.springCoinMarket.service.WalletServiceMemory;
@@ -25,7 +24,7 @@ public class WalletController {
     }
 
     @GetMapping("wallet/{id}")
-    public WalletDto getWallet(@PathVariable int id) {
+    public WalletDto getWallet(@PathVariable Integer id) {
         return  service.getWallet(id);
     }
 
@@ -36,7 +35,7 @@ public class WalletController {
 
     @DeleteMapping("/wallet/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteWallet(@PathVariable int id) {
+    public void deleteWallet(@PathVariable Integer id) {
         service.deleteWallet(id);
     }
 }

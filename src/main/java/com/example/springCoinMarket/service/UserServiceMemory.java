@@ -1,6 +1,6 @@
 package com.example.springCoinMarket.service;
 
-import com.example.springCoinMarket.dao.model.UserDao;
+import com.example.springCoinMarket.dao.model.User;
 import com.example.springCoinMarket.dao.repository.UserMemoryRepository;
 import com.example.springCoinMarket.dto.UserDto;
 
@@ -15,7 +15,7 @@ public class UserServiceMemory implements UserService {
 
     @Override
     public HashMap<Integer, UserDto> getUsers() {
-        HashMap<Integer, UserDao> usersDao = repository.getUsers();
+        HashMap<Integer, User> usersDao = repository.getUsers();
         HashMap<Integer, UserDto> usersDto = new HashMap<>();
 
         for (Integer key : usersDao.keySet()) {
@@ -34,40 +34,40 @@ public class UserServiceMemory implements UserService {
     }
 
     @Override
-    public void deleteUser(int id) {
+    public void deleteUser(Integer id) {
         repository.deleteUser(id);
     }
 
     @Override
-    public UserDto getUser(int id) {
-        UserDao userDao = repository.getUser(id);
+    public UserDto getUser(Integer id) {
+        User user = repository.getUser(id);
 
         return UserDto.builder()
-                .name(userDao.getName())
-                .id(userDao.getId())
-                .walletId(userDao.getWalletId())
+                .name(user.getName())
+                .id(user.getId())
+                .walletId(user.getWalletId())
                 .build();
     }
 
     @Override
     public void updateUser(UserDto userDto) {
-        UserDao userDao = repository.getUser(userDto.getId());
-        userDao.setName(userDto.getName());
-        userDao.setEmail(userDto.getEmail());
-        userDao.setPassword(userDto.getPassword());
+        User user = repository.getUser(userDto.getId());
+        user.setName(userDto.getName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
 
-        repository.updateUser(userDao);
+        repository.updateUser(user);
     }
 
     @Override
     public void registerUser(UserDto userDto) {
-        UserDao userDao = new UserDao();
-        userDao.setName(userDto.getName());
-        userDao.setId(userDto.getId());
-        userDao.setEmail(userDto.getEmail());
-        userDao.setWalletId(userDto.getWalletId());
-        userDao.setPassword(userDto.getPassword());
+        User user = new User();
+        user.setName(userDto.getName());
+        user.setId(userDto.getId());
+        user.setEmail(userDto.getEmail());
+        user.setWalletId(userDto.getWalletId());
+        user.setPassword(userDto.getPassword());
 
-        repository.registerUser(userDao);
+        repository.registerUser(user);
     }
 }

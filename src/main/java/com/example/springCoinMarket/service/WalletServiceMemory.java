@@ -1,6 +1,6 @@
 package com.example.springCoinMarket.service;
 
-import com.example.springCoinMarket.dao.model.WalletDao;
+import com.example.springCoinMarket.dao.model.Wallet;
 import com.example.springCoinMarket.dao.repository.CoinMemoryRepository;
 import com.example.springCoinMarket.dao.repository.WalletMemoryRepository;
 import com.example.springCoinMarket.dto.WalletDto;
@@ -19,7 +19,7 @@ public class WalletServiceMemory implements WalletService {
 
     @Override
     public HashMap<Integer, WalletDto> getWallets() {
-        HashMap<Integer, WalletDao> walletsDao = repository.getWallets();
+        HashMap<Integer, Wallet> walletsDao = repository.getWallets();
         HashMap<Integer, WalletDto> walletsDto = new HashMap<>();
 
         for (Integer key : walletsDao.keySet()) {
@@ -28,9 +28,9 @@ public class WalletServiceMemory implements WalletService {
                     .userId(walletsDao.get(key).getUserId())
                     .build();
 
-            if (walletsDao.get(key).getCoinsId() != null) {
-                for (Integer coin : walletsDao.get(key).getCoinsId()) {
-                    modelDto.getCoinsId().add(coinRepository.getCoin(coin).getId());
+            if (walletsDao.get(key).getCoinIds() != null) {
+                for (Integer coin : walletsDao.get(key).getCoinIds()) {
+                    modelDto.getCoinsIds().add(coinRepository.getCoin(coin).getId());
                 }
             }
             walletsDto.put(key, modelDto);
@@ -41,28 +41,28 @@ public class WalletServiceMemory implements WalletService {
     }
 
     @Override
-    public WalletDto getWallet(int id) {
-        WalletDao walletDao = repository.getWallet(id);
+    public WalletDto getWallet(Integer id) {
+        Wallet wallet = repository.getWallet(id);
 
         return WalletDto.builder()
-                .userId(walletDao.getUserId())
-                .coinsId(walletDao.getCoinsId())
+                .userId(wallet.getUserId())
+                .coinsIds(wallet.getCoinIds())
                 .build();
     }
 
     @Override
     public void createWallet(WalletDto walletDto) {
-        WalletDao walletDao = new WalletDao();
-        walletDao.setId(walletDto.getWalletId());
-        walletDao.setUserId(walletDto.getUserId());
-        walletDao.setCoinsId(null);
-        walletDao.setTransactionsId(null);
+        Wallet wallet = new Wallet();
+        wallet.setId(walletDto.getWalletId());
+        wallet.setUserId(walletDto.getUserId());
+        wallet.setCoinIds(null);
+        wallet.setTransactionIds(null);
 
-        repository.setWallet(walletDao);
+        repository.setWallet(wallet);
     }
 
     @Override
-    public void deleteWallet(int id) {
+    public void deleteWallet(Integer id) {
         repository.deleteWallet(id);
     }
 }

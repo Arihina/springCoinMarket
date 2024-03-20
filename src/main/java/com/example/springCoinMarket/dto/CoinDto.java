@@ -6,7 +6,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class CoinDto {
-    private int id;
-    private int quantity;
+    private Integer id;
+    private Double quantity;
     private String currency;
 }
