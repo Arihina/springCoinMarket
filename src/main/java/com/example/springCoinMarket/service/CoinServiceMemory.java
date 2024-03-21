@@ -1,5 +1,6 @@
 package com.example.springCoinMarket.service;
 
+import com.example.springCoinMarket.converter.CoinConverter;
 import com.example.springCoinMarket.dao.model.Coin;
 import com.example.springCoinMarket.dao.repository.CoinMemoryRepository;
 import com.example.springCoinMarket.dto.CoinDto;
@@ -21,12 +22,7 @@ public class CoinServiceMemory implements CoinService {
         HashMap<Integer, Coin> coinsDao = repository.getCoins();
 
         for (Integer key : coinsDao.keySet()) {
-            CoinDto modelDto = CoinDto.builder()
-                    .id(coinsDao.get(key).getId())
-                    .quantity(coinsDao.get(key).getQuantity())
-                    .currency(coinsDao.get(key).getCurrency())
-                    .build();
-
+            CoinDto modelDto = CoinConverter.toDto(coinsDao.get(key));
             coinsDto.put(key, modelDto);
         }
 
@@ -35,25 +31,12 @@ public class CoinServiceMemory implements CoinService {
 
     @Override
     public CoinDto getCoin(Integer id) {
-        var modelDao = repository.getCoin(id);
-
-        CoinDto modelDto = CoinDto.builder()
-                .id(modelDao.getId())
-                .quantity(modelDao.getQuantity())
-                .currency(modelDao.getCurrency())
-                .build();
-
-        return modelDto;
+        return CoinConverter.toDto(repository.getCoin(id));
     }
 
     @Override
     public void addCoin(CoinDto coinDto) {
-        Coin coin = new Coin();
-        coin.setId(coinDto.getId());
-        coin.setCurrency(coinDto.getCurrency());
-        coin.setQuantity(coinDto.getQuantity());
-
-        repository.addCoin(coin);
+        repository.addCoin(CoinConverter.toModel(coinDto));
     }
 
     @Override

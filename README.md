@@ -1,5 +1,5 @@
 # Digital currency exchange 
-## functional requirements of the project
+## Functional requirements of the project
 - User registration
 - Viewing assets in the user's wallet
 - Transfer of assets between users
@@ -16,10 +16,10 @@
 
 ## Planned
 - Refactor:
-    - Fix mapping paths in controller
+    - Fix mapping paths in controllers
     - Controller for registration users, with supporting wallet's service  
     - Fix names, data types (for classes and interfaces) and annotations in models
 - Make:
     - New model for saving many user's wallets for different coins
     - Transfer conversion from services to a separate class (Dao -> Dto & Dto -> Dao)
-    - Controller and service for depositing/ debiting funds from the wallet
+    - Controller and service for depositing / debiting funds from the wallet
