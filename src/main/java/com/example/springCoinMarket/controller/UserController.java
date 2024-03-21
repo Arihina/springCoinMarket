@@ -1,11 +1,9 @@
 package com.example.springCoinMarket.controller;
 
 import com.example.springCoinMarket.dto.UserDto;
-import com.example.springCoinMarket.dto.WalletDto;
 import com.example.springCoinMarket.service.UserService;
 import com.example.springCoinMarket.service.UserServiceMemory;
 import com.example.springCoinMarket.service.WalletService;
-import com.example.springCoinMarket.service.WalletServiceMemory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,28 +14,23 @@ import java.util.HashMap;
 public class UserController {
     private final UserService service;
     @Autowired
-    private WalletController walletController;
+    private WalletService walletService;
 
     public UserController() {
         service = new UserServiceMemory();
     }
+
 
     @GetMapping("/user")
     public HashMap<Integer, UserDto> getUsers() {
         return service.getUsers();
     }
 
-    @PostMapping("/registration")
-    public void registerUser(@RequestBody UserDto userDto) {
-        service.registerUser(userDto);
-        walletController.createWallet(WalletDto.builder().
-                userId(userDto.getId()).walletId(userDto.getWalletId()).coinsIds(null).build());
-    }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/user/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable Integer id) {
-        walletController.deleteWallet(getUser(id).getWalletId());
+        walletService.deleteWallet(getUser(id).getWalletId());
         service.deleteUser(id);
     }
 
@@ -46,8 +39,8 @@ public class UserController {
         return service.getUser(id);
     }
 
-    @PutMapping("/update")
-    public void updateUser(@RequestBody UserDto userDto) {
+    @PutMapping("/user/{id}")
+    public void updateUser(@RequestBody UserDto userDto, @PathVariable Integer id) {
         service.updateUser(userDto);
     }
 

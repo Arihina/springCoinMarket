@@ -12,28 +12,22 @@ import java.util.HashMap;
 public class WalletController {
     private final WalletService service;
 
-    public WalletController()
-    {
+    public WalletController() {
         service = new WalletServiceMemory();
     }
 
     @GetMapping("/wallet")
-    public HashMap<Integer, WalletDto> getWallets()
-    {
+    public HashMap<Integer, WalletDto> getWallets() {
         return service.getWallets();
     }
 
     @GetMapping("wallet/{id}")
     public WalletDto getWallet(@PathVariable Integer id) {
-        return  service.getWallet(id);
+        return service.getWallet(id);
     }
 
-    @PostMapping("/wallet/create")
-    public void createWallet(@RequestBody WalletDto walletDto) {
-        service.createWallet(walletDto);
-    }
 
-    @DeleteMapping("/wallet/delete/{id}")
+    @DeleteMapping("/wallet/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteWallet(@PathVariable Integer id) {
         service.deleteWallet(id);

@@ -1,8 +1,6 @@
 package com.example.springCoinMarket.controller;
 
 import com.example.springCoinMarket.dto.CoinDto;
-import com.example.springCoinMarket.dto.UserDto;
-import com.example.springCoinMarket.dto.WalletDto;
 import com.example.springCoinMarket.service.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;

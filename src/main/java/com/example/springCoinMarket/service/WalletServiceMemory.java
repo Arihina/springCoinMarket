@@ -24,7 +24,7 @@ public class WalletServiceMemory implements WalletService {
 
         for (Integer key : walletsDao.keySet()) {
             WalletDto modelDto = WalletDto.builder()
-                    .walletId(walletsDao.get(key).getId())
+                    .id(walletsDao.get(key).getId())
                     .userId(walletsDao.get(key).getUserId())
                     .build();
 
@@ -53,7 +53,7 @@ public class WalletServiceMemory implements WalletService {
     @Override
     public void createWallet(WalletDto walletDto) {
         Wallet wallet = new Wallet();
-        wallet.setId(walletDto.getWalletId());
+        wallet.setId(walletDto.getId());
         wallet.setUserId(walletDto.getUserId());
         wallet.setCoinIds(null);
         wallet.setTransactionIds(null);

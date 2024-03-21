@@ -10,4 +10,8 @@ public interface CoinService {
     CoinDto getCoin(Integer id);
 
     void addCoin(CoinDto coinDto);
+
+    void deleteCoin(Integer id);
+
+    void updateCoin(CoinDto coinDto);
 }

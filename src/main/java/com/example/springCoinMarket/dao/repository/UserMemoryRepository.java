@@ -7,8 +7,12 @@ import java.util.HashMap;
 
 @Repository
 public class UserMemoryRepository {
-    private final HashMap<Integer, User> users = new HashMap<>();
+    private final HashMap<Integer, User> users;
 
+    public UserMemoryRepository()
+    {
+        users = new HashMap<>();
+    }
 
     public HashMap<Integer, User> getUsers() {
         return users;

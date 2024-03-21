@@ -55,4 +55,19 @@ public class CoinServiceMemory implements CoinService {
 
         repository.addCoin(coin);
     }
+
+    @Override
+    public void deleteCoin(Integer id) {
+        repository.deleteCoin(id);
+    }
+
+    @Override
+    public void updateCoin(CoinDto coinDto) {
+        Coin coin = new Coin();
+        coin.setId(coinDto.getId());
+        coin.setQuantity(coinDto.getQuantity());
+        coin.setCurrency(coinDto.getCurrency());
+
+        repository.updateCoin(coin);
+    }
 }

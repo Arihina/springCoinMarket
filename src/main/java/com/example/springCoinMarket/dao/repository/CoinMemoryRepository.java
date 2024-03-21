@@ -7,7 +7,11 @@ import java.util.HashMap;
 
 @Repository
 public class CoinMemoryRepository {
-    private final HashMap<Integer, Coin> coins = new HashMap<>();
+    private final HashMap<Integer, Coin> coins;
+
+    public CoinMemoryRepository() {
+        coins = new HashMap<>();
+    }
 
     public HashMap<Integer, Coin> getCoins() {
         return coins;
@@ -22,5 +26,17 @@ public class CoinMemoryRepository {
 
     public void addCoin(Coin coin) {
         coins.put(coin.getId(), coin);
+    }
+
+    public void deleteCoin(Integer id) {
+        if (coins.get(id) != null) {
+            coins.remove(id);
+        }
+    }
+
+    public void updateCoin(Coin coin) {
+        if (coins.get(coin.getId()) != null) {
+            coins.put(coin.getId(), coin);
+        }
     }
 }

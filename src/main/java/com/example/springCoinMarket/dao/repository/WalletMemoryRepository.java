@@ -7,8 +7,11 @@ import java.util.HashMap;
 
 @Repository
 public class WalletMemoryRepository {
-    private final HashMap<Integer, Wallet> wallets = new HashMap<>();
+    private final HashMap<Integer, Wallet> wallets;
 
+    public WalletMemoryRepository() {
+        wallets = new HashMap<>();
+    }
 
     public HashMap<Integer, Wallet> getWallets() {
         return wallets;
