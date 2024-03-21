@@ -51,8 +51,6 @@ public class UserServiceMemory implements UserService {
 
     @Override
     public void registerUser(UserDto userDto) {
-        User user = UserConverter.toModel(userDto);
-
-        repository.registerUser(user);
+        repository.registerUser(UserConverter.toModel(userDto));
     }
 }

@@ -12,5 +12,5 @@ import java.util.List;
 public class WalletDto {
     private Integer id;
     private Integer userId;
-    private List<Integer> coinsIds;
+    private List<Integer> coinWalletIds;
 }

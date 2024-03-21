@@ -1,5 +1,6 @@
 package com.example.springCoinMarket.service;
 
+import com.example.springCoinMarket.converter.WalletConverter;
 import com.example.springCoinMarket.dao.model.Wallet;
 import com.example.springCoinMarket.dao.repository.CoinMemoryRepository;
 import com.example.springCoinMarket.dao.repository.WalletMemoryRepository;
@@ -11,7 +12,6 @@ import java.util.HashMap;
 @Service
 public class WalletServiceMemory implements WalletService {
     private final WalletMemoryRepository repository;
-    private CoinMemoryRepository coinRepository;
 
     public WalletServiceMemory() {
         repository = new WalletMemoryRepository();
@@ -23,16 +23,16 @@ public class WalletServiceMemory implements WalletService {
         HashMap<Integer, WalletDto> walletsDto = new HashMap<>();
 
         for (Integer key : walletsDao.keySet()) {
-            WalletDto modelDto = WalletDto.builder()
-                    .id(walletsDao.get(key).getId())
-                    .userId(walletsDao.get(key).getUserId())
-                    .build();
+            var modelDto = WalletConverter.toDto(walletsDao.get(key));
 
-            if (walletsDao.get(key).getCoinIds() != null) {
-                for (Integer coin : walletsDao.get(key).getCoinIds()) {
-                    modelDto.getCoinsIds().add(coinRepository.getCoin(coin).getId());
+            // TODO
+            /*
+            if (walletsDao.get(key).getCoinWalletIds() != null) {
+                for (Integer id : walletsDao.get(key).getCoinWalletIds()) {
+                    modelDto.getCoinWalletIds().add( ----- );
                 }
             }
+             */
             walletsDto.put(key, modelDto);
 
         }
@@ -42,23 +42,12 @@ public class WalletServiceMemory implements WalletService {
 
     @Override
     public WalletDto getWallet(Integer id) {
-        Wallet wallet = repository.getWallet(id);
-
-        return WalletDto.builder()
-                .userId(wallet.getUserId())
-                .coinsIds(wallet.getCoinIds())
-                .build();
+        return WalletConverter.toDto(repository.getWallet(id));
     }
 
     @Override
     public void createWallet(WalletDto walletDto) {
-        Wallet wallet = new Wallet();
-        wallet.setId(walletDto.getId());
-        wallet.setUserId(walletDto.getUserId());
-        wallet.setCoinIds(null);
-        wallet.setTransactionIds(null);
-
-        repository.setWallet(wallet);
+        repository.setWallet(WalletConverter.toModel(walletDto));
     }
 
     @Override

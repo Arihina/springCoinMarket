@@ -9,6 +9,6 @@ import java.util.List;
 public class Wallet {
     private Integer userId;
     private Integer id;
-    private List<Integer> coinIds;
+    private List<Integer> coinWalletIds;
     private List<Integer> transactionIds;
 }

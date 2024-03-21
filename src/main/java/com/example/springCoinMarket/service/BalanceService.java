@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class BalanceService {
     public void cashIn(CoinDto coinDto, WalletDto walletDto) {
-        var coinsId = walletDto.getCoinsIds();
-        for (Integer coinId : coinsId) {
+        var coinsWalletIds = walletDto.getCoinWalletIds();
+        for (Integer id : coinsWalletIds) {
 
         }
     }
 
     public void cashOut(CoinDto coinDto, WalletDto walletDto) {
-        var coinsId = walletDto.getCoinsIds();
-        for (Integer coinId : coinsId) {
+        var coinsWalletIds = walletDto.getCoinWalletIds();
+        for (Integer id : coinsWalletIds) {
 
         }
     }
