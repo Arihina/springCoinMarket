@@ -1,22 +1,38 @@
 package com.example.springCoinMarket.service;
 
+import com.example.springCoinMarket.dao.model.CoinWallet;
+import com.example.springCoinMarket.dao.repository.CoinWalletRepository;
+import com.example.springCoinMarket.dto.CashInDto;
+import com.example.springCoinMarket.dto.CashOutDto;
 import com.example.springCoinMarket.dto.CoinDto;
 import com.example.springCoinMarket.dto.WalletDto;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BalanceService {
-    public void cashIn(CoinDto coinDto, WalletDto walletDto) {
-        var coinsWalletIds = walletDto.getCoinWalletIds();
-        for (Integer id : coinsWalletIds) {
+    private final CoinWalletRepository repository;
 
+    public BalanceService() {
+        repository = new CoinWalletRepository();
+    }
+
+    public void cashIn(CashInDto cashInDto) {
+        CoinWallet coinWallet = repository.getCoinWallet(cashInDto.getCoinWalletId());
+        if (coinWallet != null) {
+            Integer oldCountCoin = coinWallet.getCountCoin();
+            coinWallet.setCountCoin(oldCountCoin + cashInDto.getCountCoin());
+            // repository.updateCoinWallet(coinWallet);
         }
     }
 
-    public void cashOut(CoinDto coinDto, WalletDto walletDto) {
-        var coinsWalletIds = walletDto.getCoinWalletIds();
-        for (Integer id : coinsWalletIds) {
-
+    public void cashOut(CashOutDto cashOutDto) {
+        CoinWallet coinWallet = repository.getCoinWallet(cashOutDto.getCoinWalletId());
+        if (coinWallet != null) {
+            Integer countCoin = coinWallet.getCountCoin();
+            if (countCoin - cashOutDto.getCountCoin() >= 0) {
+                coinWallet.setCountCoin(countCoin - cashOutDto.getCountCoin());
+                // repository.updateCoinWallet(coinWallet);
+            }
         }
     }
 }

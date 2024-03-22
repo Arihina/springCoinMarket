@@ -31,7 +31,7 @@ public class RegistrationController {
         walletService.createWallet(WalletDto.builder().
                 userId(userDto.getId()).id(userDto.getWalletId()).coinWalletIds(null).build());
     }
-
+    /*
     @GetMapping("/debug/wallet")
     public HashMap<Integer, WalletDto> a() {
         return walletService.getWallets();
@@ -41,4 +41,5 @@ public class RegistrationController {
     public HashMap<Integer, UserDto> b() {
         return userService.getUsers();
     }
+     */
 }

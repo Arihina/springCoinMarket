@@ -46,8 +46,10 @@ public class CoinWalletController {
         service.addCoinWallet(coinWalletDto);
     }
 
+    /*
     @PostMapping("/debug/coin")
     public void addCoin(@RequestBody CoinDto coinDto) {
         coinService.addCoin(coinDto);
     }
+     */
 }

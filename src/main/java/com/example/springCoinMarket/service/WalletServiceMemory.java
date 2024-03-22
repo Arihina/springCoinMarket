@@ -12,9 +12,11 @@ import java.util.HashMap;
 @Service
 public class WalletServiceMemory implements WalletService {
     private final WalletMemoryRepository repository;
+    private final CoinWalletService service;
 
     public WalletServiceMemory() {
         repository = new WalletMemoryRepository();
+        service = new CoinWalletServiceMemory();
     }
 
     @Override
@@ -26,13 +28,11 @@ public class WalletServiceMemory implements WalletService {
             var modelDto = WalletConverter.toDto(walletsDao.get(key));
 
             // TODO
-            /*
             if (walletsDao.get(key).getCoinWalletIds() != null) {
                 for (Integer id : walletsDao.get(key).getCoinWalletIds()) {
-                    modelDto.getCoinWalletIds().add( ----- );
+                    modelDto.getCoinWalletIds().add(service.getCoinWallet(id).getCoinId());
                 }
             }
-             */
             walletsDto.put(key, modelDto);
 
         }
@@ -53,5 +53,10 @@ public class WalletServiceMemory implements WalletService {
     @Override
     public void deleteWallet(Integer id) {
         repository.deleteWallet(id);
+    }
+
+    // TODO
+    public void addCoinWallet(Integer id) {
+
     }
 }
