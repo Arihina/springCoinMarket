@@ -2,9 +2,7 @@ package com.example.springCoinMarket.controller;
 
 import com.example.springCoinMarket.dto.CoinDto;
 import com.example.springCoinMarket.dto.CoinWalletDto;
-import com.example.springCoinMarket.service.CoinServiceMemory;
-import com.example.springCoinMarket.service.CoinWalletService;
-import com.example.springCoinMarket.service.CoinWalletServiceMemory;
+import com.example.springCoinMarket.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +12,12 @@ import java.util.HashMap;
 public class CoinWalletController {
     private final CoinWalletService service;
     private final CoinServiceMemory coinService;
+    private final WalletService walletService;
 
     public CoinWalletController() {
         service = new CoinWalletServiceMemory();
         coinService = new CoinServiceMemory();
+        walletService = new WalletServiceMemory();
     }
 
     @GetMapping("/coin_wallet")
@@ -41,9 +41,10 @@ public class CoinWalletController {
         service.deleteCoinWallet(id);
     }
 
-    @PostMapping("/coin_wallet/registration")
-    public void addCoinWallet(@RequestBody CoinWalletDto coinWalletDto) {
+    @PostMapping("/coin_wallet/{walletId}/registration")
+    public void addCoinWallet(@RequestBody CoinWalletDto coinWalletDto, @PathVariable Integer walletId) {
         service.addCoinWallet(coinWalletDto);
+        walletService.addCoinWallet(walletId);
     }
 
     /*

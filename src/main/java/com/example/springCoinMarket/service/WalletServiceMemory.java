@@ -2,7 +2,6 @@ package com.example.springCoinMarket.service;
 
 import com.example.springCoinMarket.converter.WalletConverter;
 import com.example.springCoinMarket.dao.model.Wallet;
-import com.example.springCoinMarket.dao.repository.CoinMemoryRepository;
 import com.example.springCoinMarket.dao.repository.WalletMemoryRepository;
 import com.example.springCoinMarket.dto.WalletDto;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,6 @@ public class WalletServiceMemory implements WalletService {
         for (Integer key : walletsDao.keySet()) {
             var modelDto = WalletConverter.toDto(walletsDao.get(key));
 
-            // TODO
             if (walletsDao.get(key).getCoinWalletIds() != null) {
                 for (Integer id : walletsDao.get(key).getCoinWalletIds()) {
                     modelDto.getCoinWalletIds().add(service.getCoinWallet(id).getCoinId());
@@ -55,8 +53,11 @@ public class WalletServiceMemory implements WalletService {
         repository.deleteWallet(id);
     }
 
-    // TODO
+    // TODO check it (fix?)
     public void addCoinWallet(Integer id) {
-
+        Wallet wallet = repository.getWallet(id);
+        var ids = wallet.getCoinWalletIds();
+        ids.add(id);
+        wallet.setCoinWalletIds(ids);
     }
 }

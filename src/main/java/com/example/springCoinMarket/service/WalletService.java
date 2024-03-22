@@ -12,4 +12,6 @@ public interface WalletService {
     void createWallet(WalletDto WalletDao);
 
     void deleteWallet(Integer id);
+
+    void addCoinWallet(Integer id);
 }
