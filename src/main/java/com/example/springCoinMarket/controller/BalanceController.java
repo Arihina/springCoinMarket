@@ -2,23 +2,20 @@ package com.example.springCoinMarket.controller;
 
 import com.example.springCoinMarket.dto.CashInDto;
 import com.example.springCoinMarket.dto.CashOutDto;
-import com.example.springCoinMarket.dto.CoinDto;
-import com.example.springCoinMarket.dto.CoinWalletDto;
 import com.example.springCoinMarket.service.BalanceService;
-import com.example.springCoinMarket.service.CoinServiceMemory;
-import com.example.springCoinMarket.service.CoinWalletService;
-import com.example.springCoinMarket.service.CoinWalletServiceMemory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BalanceController {
+
     private final BalanceService service;
 
-    public BalanceController() {
-        service = new BalanceService();
+    @Autowired
+    public BalanceController(BalanceService service) {
+        this.service = service;
     }
 
     @PutMapping("/cash_in")

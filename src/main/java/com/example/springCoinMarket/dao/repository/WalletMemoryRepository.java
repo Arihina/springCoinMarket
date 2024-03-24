@@ -4,22 +4,19 @@ import com.example.springCoinMarket.dao.model.Wallet;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 public class WalletMemoryRepository {
-    private final HashMap<Integer, Wallet> wallets;
+    private final Map<Integer, Wallet> wallets = new HashMap<>();
 
-    public WalletMemoryRepository() {
-        wallets = new HashMap<>();
-    }
 
-    public HashMap<Integer, Wallet> getWallets() {
+    public Map<Integer, Wallet> getWallets() {
         return wallets;
     }
 
     public Wallet getWallet(Integer id) {
-        if (wallets.get(id) != null)
-        {
+        if (wallets.get(id) != null) {
             return wallets.get(id);
         }
         return null;

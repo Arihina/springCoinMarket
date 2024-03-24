@@ -2,7 +2,6 @@ package com.example.springCoinMarket.controller;
 
 import com.example.springCoinMarket.dto.UserDto;
 import com.example.springCoinMarket.service.UserService;
-import com.example.springCoinMarket.service.UserServiceMemory;
 import com.example.springCoinMarket.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,14 +11,15 @@ import java.util.HashMap;
 
 @RestController
 public class UserController {
+
     private final UserService service;
+    private final WalletService walletService;
+
     @Autowired
-    private WalletService walletService;
-
-    public UserController() {
-        service = new UserServiceMemory();
+    public UserController(UserService service, WalletService walletService) {
+        this.service = service;
+        this.walletService = walletService;
     }
-
 
     @GetMapping("/user")
     public HashMap<Integer, UserDto> getUsers() {

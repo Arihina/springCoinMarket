@@ -4,16 +4,14 @@ import com.example.springCoinMarket.dao.model.Coin;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 public class CoinMemoryRepository {
-    private final HashMap<Integer, Coin> coins;
+    private final Map<Integer, Coin> coins = new HashMap<>();
 
-    public CoinMemoryRepository() {
-        coins = new HashMap<>();
-    }
 
-    public HashMap<Integer, Coin> getCoins() {
+    public Map<Integer, Coin> getCoins() {
         return coins;
     }
 

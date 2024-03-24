@@ -3,6 +3,7 @@ package com.example.springCoinMarket.controller;
 import com.example.springCoinMarket.dto.CoinDto;
 import com.example.springCoinMarket.service.CoinService;
 import com.example.springCoinMarket.service.CoinServiceMemory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +13,9 @@ import java.util.HashMap;
 public class CoinController {
     private final CoinService service;
 
-    public CoinController() {
-        service = new CoinServiceMemory();
+    @Autowired
+    public CoinController(CoinService service) {
+        this.service = service;
     }
 
     @GetMapping("/coin")

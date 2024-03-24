@@ -4,33 +4,33 @@ import com.example.springCoinMarket.converter.WalletConverter;
 import com.example.springCoinMarket.dao.model.Wallet;
 import com.example.springCoinMarket.dao.repository.WalletMemoryRepository;
 import com.example.springCoinMarket.dto.WalletDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class WalletServiceMemory implements WalletService {
+
     private final WalletMemoryRepository repository;
     private final CoinWalletService service;
 
-    public WalletServiceMemory() {
-        repository = new WalletMemoryRepository();
-        service = new CoinWalletServiceMemory();
+    @Autowired
+    public WalletServiceMemory(WalletMemoryRepository repository, CoinWalletService service) {
+        this.repository = repository;
+        this.service = service;
     }
+
 
     @Override
     public HashMap<Integer, WalletDto> getWallets() {
-        HashMap<Integer, Wallet> walletsDao = repository.getWallets();
+        Map<Integer, Wallet> walletsDao = repository.getWallets();
         HashMap<Integer, WalletDto> walletsDto = new HashMap<>();
 
         for (Integer key : walletsDao.keySet()) {
             var modelDto = WalletConverter.toDto(walletsDao.get(key));
-
-            if (walletsDao.get(key).getCoinWalletIds() != null) {
-                for (Integer id : walletsDao.get(key).getCoinWalletIds()) {
-                    modelDto.getCoinWalletIds().add(service.getCoinWallet(id).getCoinId());
-                }
-            }
             walletsDto.put(key, modelDto);
 
         }
@@ -53,10 +53,13 @@ public class WalletServiceMemory implements WalletService {
         repository.deleteWallet(id);
     }
 
-    // TODO check it (fix?)
-    public void addCoinWallet(Integer id) {
-        Wallet wallet = repository.getWallet(id);
+    @Override
+    public void addCoinWallet(Integer id, Integer walletId) {
+        Wallet wallet = repository.getWallet(walletId);
         var ids = wallet.getCoinWalletIds();
+        if (ids == null) {
+            ids = new ArrayList<>();
+        }
         ids.add(id);
         wallet.setCoinWalletIds(ids);
     }

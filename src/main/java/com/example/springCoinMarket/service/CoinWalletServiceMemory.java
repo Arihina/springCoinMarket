@@ -5,22 +5,25 @@ import com.example.springCoinMarket.dao.model.CoinWallet;
 import com.example.springCoinMarket.dao.repository.CoinMemoryRepository;
 import com.example.springCoinMarket.dao.repository.CoinWalletRepository;
 import com.example.springCoinMarket.dto.CoinWalletDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class CoinWalletServiceMemory implements CoinWalletService {
     private final CoinWalletRepository repository;
 
-    public CoinWalletServiceMemory() {
-        repository = new CoinWalletRepository();
+    @Autowired
+    public CoinWalletServiceMemory(CoinWalletRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public HashMap<Integer, CoinWalletDto> getCoinWallets() {
         HashMap<Integer, CoinWalletDto> coinWalletsDto = new HashMap<>();
-        HashMap<Integer, CoinWallet> coinWallets = repository.getCoinWallets();
+        Map<Integer, CoinWallet> coinWallets = repository.getCoinWallets();
 
         for (Integer key : coinWallets.keySet()) {
             var modelDto = CoinWalletConverter.toDto(coinWallets.get(key));

@@ -3,6 +3,7 @@ package com.example.springCoinMarket.controller;
 import com.example.springCoinMarket.dto.WalletDto;
 import com.example.springCoinMarket.service.WalletService;
 import com.example.springCoinMarket.service.WalletServiceMemory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +11,12 @@ import java.util.HashMap;
 
 @RestController
 public class WalletController {
+
     private final WalletService service;
 
-    public WalletController() {
-        service = new WalletServiceMemory();
+    @Autowired
+    public WalletController(WalletService service) {
+        this.service = service;
     }
 
     @GetMapping("/wallet")

@@ -13,5 +13,5 @@ public interface WalletService {
 
     void deleteWallet(Integer id);
 
-    void addCoinWallet(Integer id);
+    void addCoinWallet(Integer id, Integer walletId);
 }

@@ -6,6 +6,7 @@ import com.example.springCoinMarket.service.UserService;
 import com.example.springCoinMarket.service.UserServiceMemory;
 import com.example.springCoinMarket.service.WalletService;
 import com.example.springCoinMarket.service.WalletServiceMemory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +20,10 @@ public class RegistrationController {
     private final UserService userService;
     private final WalletService walletService;
 
-
-    public RegistrationController() {
-        userService = new UserServiceMemory();
-        walletService = new WalletServiceMemory();
+    @Autowired
+    public RegistrationController(UserService userService, WalletService walletService) {
+        this.userService = userService;
+        this.walletService = walletService;
     }
 
     @PostMapping("/login/registration")
@@ -31,7 +32,7 @@ public class RegistrationController {
         walletService.createWallet(WalletDto.builder().
                 userId(userDto.getId()).id(userDto.getWalletId()).coinWalletIds(null).build());
     }
-    /*
+
     @GetMapping("/debug/wallet")
     public HashMap<Integer, WalletDto> a() {
         return walletService.getWallets();
@@ -41,5 +42,5 @@ public class RegistrationController {
     public HashMap<Integer, UserDto> b() {
         return userService.getUsers();
     }
-     */
+
 }

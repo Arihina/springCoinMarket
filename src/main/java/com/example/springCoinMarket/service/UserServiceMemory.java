@@ -4,9 +4,12 @@ import com.example.springCoinMarket.converter.UserConverter;
 import com.example.springCoinMarket.dao.model.User;
 import com.example.springCoinMarket.dao.repository.UserMemoryRepository;
 import com.example.springCoinMarket.dto.UserDto;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Map;
 
+@Service
 public class UserServiceMemory implements UserService {
     private final UserMemoryRepository repository;
 
@@ -16,7 +19,7 @@ public class UserServiceMemory implements UserService {
 
     @Override
     public HashMap<Integer, UserDto> getUsers() {
-        HashMap<Integer, User> usersDao = repository.getUsers();
+        Map<Integer, User> usersDao = repository.getUsers();
         HashMap<Integer, UserDto> usersDto = new HashMap<>();
 
         for (Integer key : usersDao.keySet()) {
