@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 public interface UserService {
 
-    HashMap<Integer, UserDto> getUsers();
+    HashMap<Long, UserDto> getUsers();
     void registerUser(UserDto userDto);
-    void deleteUser(Integer id);
-    UserDto getUser(Integer id);
+    void deleteUser(Long id);
+    UserDto getUser(Long id);
     void updateUser(UserDto userDto);
 }

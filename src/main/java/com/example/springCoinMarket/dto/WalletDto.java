@@ -11,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 public class WalletDto {
     private Integer id;
-    private Integer userId;
+    private Long userId;
     private List<Integer> coinWalletIds;
 }

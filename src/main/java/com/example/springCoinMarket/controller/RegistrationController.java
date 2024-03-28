@@ -39,7 +39,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/debug/user")
-    public HashMap<Integer, UserDto> b() {
+    public HashMap<Long, UserDto> b() {
         return userService.getUsers();
     }
 

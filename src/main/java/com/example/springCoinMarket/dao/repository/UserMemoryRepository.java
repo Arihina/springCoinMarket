@@ -8,19 +8,19 @@ import java.util.Map;
 
 @Repository
 public class UserMemoryRepository {
-    private final Map<Integer, User> users = new HashMap<>();
+    private final Map<Long, User> users = new HashMap<>();
 
-    public Map<Integer, User> getUsers() {
+    public Map<Long, User> getUsers() {
         return users;
     }
 
-    public void deleteUser(Integer id) {
+    public void deleteUser(Long id) {
         if (users.get(id) != null) {
             users.remove(id);
         }
     }
 
-    public User getUser(Integer id) {
+    public User getUser(Long id) {
         if (users.get(id) != null) {
             return users.get(id);
         }

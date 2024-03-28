@@ -22,25 +22,25 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public HashMap<Integer, UserDto> getUsers() {
+    public HashMap<Long, UserDto> getUsers() {
         return service.getUsers();
     }
 
 
     @DeleteMapping("/user/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable Integer id) {
+    public void deleteUser(@PathVariable Long id) {
         walletService.deleteWallet(getUser(id).getWalletId());
         service.deleteUser(id);
     }
 
     @GetMapping("/user/{id}")
-    public UserDto getUser(@PathVariable Integer id) {
+    public UserDto getUser(@PathVariable Long id) {
         return service.getUser(id);
     }
 
     @PutMapping("/user/{id}")
-    public void updateUser(@RequestBody UserDto userDto, @PathVariable Integer id) {
+    public void updateUser(@RequestBody UserDto userDto, @PathVariable Long id) {
         service.updateUser(userDto);
     }
 

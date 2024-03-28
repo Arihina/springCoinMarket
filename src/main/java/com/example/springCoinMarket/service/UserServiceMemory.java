@@ -18,11 +18,11 @@ public class UserServiceMemory implements UserService {
     }
 
     @Override
-    public HashMap<Integer, UserDto> getUsers() {
-        Map<Integer, User> usersDao = repository.getUsers();
-        HashMap<Integer, UserDto> usersDto = new HashMap<>();
+    public HashMap<Long, UserDto> getUsers() {
+        Map<Long, User> usersDao = repository.getUsers();
+        HashMap<Long, UserDto> usersDto = new HashMap<>();
 
-        for (Integer key : usersDao.keySet()) {
+        for (Long key : usersDao.keySet()) {
             var modelDto = UserConverter.toFullDto(usersDao.get(key));
             usersDto.put(key, modelDto);
         }
@@ -31,12 +31,12 @@ public class UserServiceMemory implements UserService {
     }
 
     @Override
-    public void deleteUser(Integer id) {
+    public void deleteUser(Long id) {
         repository.deleteUser(id);
     }
 
     @Override
-    public UserDto getUser(Integer id) {
+    public UserDto getUser(Long id) {
         User user = repository.getUser(id);
 
         return UserConverter.toDto(user);
