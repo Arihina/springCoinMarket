@@ -8,20 +8,20 @@ import java.util.Map;
 
 @Repository
 public class CoinWalletRepository {
-    private final Map<Integer, CoinWallet> coinWallets = new HashMap<>();
+    private final Map<Long, CoinWallet> coinWallets = new HashMap<>();
 
 
-    public Map<Integer, CoinWallet> getCoinWallets() {
+    public Map<Long, CoinWallet> getCoinWallets() {
         return coinWallets;
     }
 
-    public void deleteCoinWallet(Integer id) {
+    public void deleteCoinWallet(Long id) {
         if (coinWallets.get(id) != null) {
             coinWallets.remove(id);
         }
     }
 
-    public CoinWallet getCoinWallet(Integer id) {
+    public CoinWallet getCoinWallet(Long id) {
         if (coinWallets.get(id) != null) {
             return coinWallets.get(id);
         }
