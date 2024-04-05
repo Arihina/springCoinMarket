@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class WalletDto {
-    private Integer id;
+    private Long id;
     private Long userId;
-    private List<Integer> coinWalletIds;
+    private List<Long> coinWalletIds;
 }

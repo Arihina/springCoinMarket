@@ -5,13 +5,13 @@ import com.example.springCoinMarket.dto.CoinDto;
 import java.util.HashMap;
 
 public interface CoinService {
-    HashMap<Integer, CoinDto> getCoins();
+    HashMap<Long, CoinDto> getCoins();
 
-    CoinDto getCoin(Integer id);
+    CoinDto getCoin(Long id);
 
     void addCoin(CoinDto coinDto);
 
-    void deleteCoin(Integer id);
+    void deleteCoin(Long id);
 
     void updateCoin(CoinDto coinDto);
 }

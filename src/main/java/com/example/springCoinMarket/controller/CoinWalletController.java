@@ -21,12 +21,12 @@ public class CoinWalletController {
     }
 
     @GetMapping("/coin_wallet")
-    public HashMap<Integer, CoinWalletDto> getCoinWallets() {
+    public HashMap<Long, CoinWalletDto> getCoinWallets() {
         return service.getCoinWallets();
     }
 
     @GetMapping("/coin_wallet/{id}")
-    public CoinWalletDto getCoinWallet(@PathVariable Integer id) {
+    public CoinWalletDto getCoinWallet(@PathVariable Long id) {
         return service.getCoinWallet(id);
     }
 
@@ -37,12 +37,12 @@ public class CoinWalletController {
 
     @DeleteMapping("/coin_wallet/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCoinWallet(@PathVariable Integer id) {
+    public void deleteCoinWallet(@PathVariable Long id) {
         service.deleteCoinWallet(id);
     }
 
     @PostMapping("/coin_wallet/{walletId}/registration")
-    public void addCoinWallet(@RequestBody CoinWalletDto coinWalletDto, @PathVariable Integer walletId) {
+    public void addCoinWallet(@RequestBody CoinWalletDto coinWalletDto, @PathVariable Long walletId) {
         service.addCoinWallet(coinWalletDto);
         walletService.addCoinWallet(coinWalletDto.getId(), walletId);
     }

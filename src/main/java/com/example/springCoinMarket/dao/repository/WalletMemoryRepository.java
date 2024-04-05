@@ -8,14 +8,14 @@ import java.util.Map;
 
 @Repository
 public class WalletMemoryRepository {
-    private final Map<Integer, Wallet> wallets = new HashMap<>();
+    private final Map<Long, Wallet> wallets = new HashMap<>();
 
 
-    public Map<Integer, Wallet> getWallets() {
+    public Map<Long, Wallet> getWallets() {
         return wallets;
     }
 
-    public Wallet getWallet(Integer id) {
+    public Wallet getWallet(Long id) {
         if (wallets.get(id) != null) {
             return wallets.get(id);
         }
@@ -26,7 +26,7 @@ public class WalletMemoryRepository {
         wallets.put(wallet.getId(), wallet);
     }
 
-    public void deleteWallet(Integer id) {
+    public void deleteWallet(Long id) {
         if (wallets.get(id) != null) {
             wallets.remove(id);
         }

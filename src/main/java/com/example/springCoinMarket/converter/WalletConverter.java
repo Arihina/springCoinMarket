@@ -11,7 +11,7 @@ public class WalletConverter {
         wallet.setId(walletDto.getId());
         wallet.setUserId(walletDto.getUserId());
         wallet.setCoinWalletIds(null);
-        wallet.setTransactionIds(null);
+        //wallet.setTransactionIds(null);
 
         return wallet;
     }

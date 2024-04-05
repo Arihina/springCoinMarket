@@ -3,16 +3,11 @@ package com.example.springCoinMarket.controller;
 import com.example.springCoinMarket.dto.UserDto;
 import com.example.springCoinMarket.dto.WalletDto;
 import com.example.springCoinMarket.service.UserService;
-import com.example.springCoinMarket.service.UserServiceMemory;
 import com.example.springCoinMarket.service.WalletService;
-import com.example.springCoinMarket.service.WalletServiceMemory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
 
 @RestController
 public class RegistrationController {
@@ -32,15 +27,4 @@ public class RegistrationController {
         walletService.createWallet(WalletDto.builder().
                 userId(userDto.getId()).id(userDto.getWalletId()).coinWalletIds(null).build());
     }
-
-    @GetMapping("/debug/wallet")
-    public HashMap<Integer, WalletDto> a() {
-        return walletService.getWallets();
-    }
-
-    @GetMapping("/debug/user")
-    public HashMap<Long, UserDto> b() {
-        return userService.getUsers();
-    }
-
 }

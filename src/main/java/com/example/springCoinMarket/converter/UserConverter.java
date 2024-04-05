@@ -11,7 +11,7 @@ public class UserConverter {
         user.setName(userDto.getName());
         user.setId(userDto.getId());
         user.setEmail(userDto.getEmail());
-        user.setWalletId(userDto.getWalletId());
+        //user.setWalletId(user.getWallet().getId());
         user.setPassword(userDto.getPassword());
 
         return user;
@@ -21,7 +21,7 @@ public class UserConverter {
         return UserDto.builder()
                 .name(user.getName())
                 .id(user.getId())
-                .walletId(user.getWalletId())
+                //.walletId(user.getWallet().getId())
                 .build();
     }
 
@@ -31,7 +31,7 @@ public class UserConverter {
                 email(user.getEmail()).
                 password(user.getPassword()).
                 id(user.getId()).
-                walletId(user.getWalletId()).
+                //walletId(user.getWallet().getId()).
                 build();
     }
 }

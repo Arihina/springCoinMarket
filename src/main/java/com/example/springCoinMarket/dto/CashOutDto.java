@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class CashOutDto {
     private Integer id;
-    private Integer coinWalletId;
-    private Integer coinId;
+    private Long coinWalletId;
+    private Long coinId;
     private Integer countCoin;
 }

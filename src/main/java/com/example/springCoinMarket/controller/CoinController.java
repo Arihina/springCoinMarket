@@ -19,12 +19,12 @@ public class CoinController {
     }
 
     @GetMapping("/coin")
-    public HashMap<Integer, CoinDto> getCoins() {
+    public HashMap<Long, CoinDto> getCoins() {
         return service.getCoins();
     }
 
     @GetMapping("/coin/{id}")
-    public CoinDto getCoin(@PathVariable Integer id) {
+    public CoinDto getCoin(@PathVariable Long id) {
         return service.getCoin(id);
     }
 
@@ -35,7 +35,7 @@ public class CoinController {
 
     @DeleteMapping("/coin/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCoin(@PathVariable Integer id) {
+    public void deleteCoin(@PathVariable Long id) {
         service.deleteCoin(id);
     }
 

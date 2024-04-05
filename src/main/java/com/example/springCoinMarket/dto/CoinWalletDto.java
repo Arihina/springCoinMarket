@@ -6,8 +6,8 @@ import lombok.Getter;
 @Builder
 @Getter
 public class CoinWalletDto {
-    private Integer id;
-    private Integer coinId;
+    private Long id;
+    private Long coinId;
     private String coinName;
     private Integer countCoin;
 }

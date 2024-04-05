@@ -2,8 +2,7 @@ package com.example.springCoinMarket.service;
 
 import com.example.springCoinMarket.converter.CoinWalletConverter;
 import com.example.springCoinMarket.dao.model.CoinWallet;
-import com.example.springCoinMarket.dao.repository.CoinMemoryRepository;
-import com.example.springCoinMarket.dao.repository.CoinWalletRepository;
+import com.example.springCoinMarket.dao.repository.CoinWalletMemoryRepository;
 import com.example.springCoinMarket.dto.CoinWalletDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,19 +12,19 @@ import java.util.Map;
 
 @Service
 public class CoinWalletServiceMemory implements CoinWalletService {
-    private final CoinWalletRepository repository;
+    private final CoinWalletMemoryRepository repository;
 
     @Autowired
-    public CoinWalletServiceMemory(CoinWalletRepository repository) {
+    public CoinWalletServiceMemory(CoinWalletMemoryRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public HashMap<Integer, CoinWalletDto> getCoinWallets() {
-        HashMap<Integer, CoinWalletDto> coinWalletsDto = new HashMap<>();
-        Map<Integer, CoinWallet> coinWallets = repository.getCoinWallets();
+    public HashMap<Long, CoinWalletDto> getCoinWallets() {
+        HashMap<Long, CoinWalletDto> coinWalletsDto = new HashMap<>();
+        Map<Long, CoinWallet> coinWallets = repository.getCoinWallets();
 
-        for (Integer key : coinWallets.keySet()) {
+        for (var key : coinWallets.keySet()) {
             var modelDto = CoinWalletConverter.toDto(coinWallets.get(key));
             coinWalletsDto.put(key, modelDto);
         }
@@ -34,7 +33,7 @@ public class CoinWalletServiceMemory implements CoinWalletService {
     }
 
     @Override
-    public CoinWalletDto getCoinWallet(Integer id) {
+    public CoinWalletDto getCoinWallet(Long id) {
         CoinWallet coinWallet = repository.getCoinWallet(id);
 
         return CoinWalletConverter.toDto(coinWallet);
@@ -46,7 +45,7 @@ public class CoinWalletServiceMemory implements CoinWalletService {
     }
 
     @Override
-    public void deleteCoinWallet(Integer id) {
+    public void deleteCoinWallet(Long id) {
         repository.deleteCoinWallet(id);
     }
 

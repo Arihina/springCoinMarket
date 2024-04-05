@@ -20,19 +20,19 @@ public class WalletController {
     }
 
     @GetMapping("/wallet")
-    public HashMap<Integer, WalletDto> getWallets() {
+    public HashMap<Long, WalletDto> getWallets() {
         return service.getWallets();
     }
 
     @GetMapping("wallet/{id}")
-    public WalletDto getWallet(@PathVariable Integer id) {
+    public WalletDto getWallet(@PathVariable Long id) {
         return service.getWallet(id);
     }
 
 
     @DeleteMapping("/wallet/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteWallet(@PathVariable Integer id) {
+    public void deleteWallet(@PathVariable Long id) {
         service.deleteWallet(id);
     }
 }

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class CoinWalletRepository {
+public class CoinWalletMemoryRepository {
     private final Map<Long, CoinWallet> coinWallets = new HashMap<>();
 
 

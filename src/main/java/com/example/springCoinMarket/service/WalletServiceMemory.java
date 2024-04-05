@@ -25,11 +25,11 @@ public class WalletServiceMemory implements WalletService {
 
 
     @Override
-    public HashMap<Integer, WalletDto> getWallets() {
-        Map<Integer, Wallet> walletsDao = repository.getWallets();
-        HashMap<Integer, WalletDto> walletsDto = new HashMap<>();
+    public HashMap<Long, WalletDto> getWallets() {
+        Map<Long, Wallet> walletsDao = repository.getWallets();
+        HashMap<Long, WalletDto> walletsDto = new HashMap<>();
 
-        for (Integer key : walletsDao.keySet()) {
+        for (var key : walletsDao.keySet()) {
             var modelDto = WalletConverter.toDto(walletsDao.get(key));
             walletsDto.put(key, modelDto);
 
@@ -39,7 +39,7 @@ public class WalletServiceMemory implements WalletService {
     }
 
     @Override
-    public WalletDto getWallet(Integer id) {
+    public WalletDto getWallet(Long id) {
         return WalletConverter.toDto(repository.getWallet(id));
     }
 
@@ -49,12 +49,12 @@ public class WalletServiceMemory implements WalletService {
     }
 
     @Override
-    public void deleteWallet(Integer id) {
+    public void deleteWallet(Long id) {
         repository.deleteWallet(id);
     }
 
     @Override
-    public void addCoinWallet(Integer id, Integer walletId) {
+    public void addCoinWallet(Long id, Long walletId) {
         Wallet wallet = repository.getWallet(walletId);
         var ids = wallet.getCoinWalletIds();
         if (ids == null) {

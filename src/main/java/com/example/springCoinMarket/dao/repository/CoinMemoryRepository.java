@@ -8,14 +8,14 @@ import java.util.Map;
 
 @Repository
 public class CoinMemoryRepository {
-    private final Map<Integer, Coin> coins = new HashMap<>();
+    private final Map<Long, Coin> coins = new HashMap<>();
 
 
-    public Map<Integer, Coin> getCoins() {
+    public Map<Long, Coin> getCoins() {
         return coins;
     }
 
-    public Coin getCoin(Integer id) {
+    public Coin getCoin(Long id) {
         if (coins.get(id) != null) {
             return coins.get(id);
         }
@@ -26,7 +26,7 @@ public class CoinMemoryRepository {
         coins.put(coin.getId(), coin);
     }
 
-    public void deleteCoin(Integer id) {
+    public void deleteCoin(Long id) {
         if (coins.get(id) != null) {
             coins.remove(id);
         }

@@ -20,11 +20,11 @@ public class CoinServiceMemory implements CoinService {
     }
 
     @Override
-    public HashMap<Integer, CoinDto> getCoins() {
-        HashMap<Integer, CoinDto> coinsDto = new HashMap<>();
-        Map<Integer, Coin> coinsDao = repository.getCoins();
+    public HashMap<Long, CoinDto> getCoins() {
+        HashMap<Long, CoinDto> coinsDto = new HashMap<>();
+        Map<Long, Coin> coinsDao = repository.getCoins();
 
-        for (Integer key : coinsDao.keySet()) {
+        for (var key : coinsDao.keySet()) {
             CoinDto modelDto = CoinConverter.toDto(coinsDao.get(key));
             coinsDto.put(key, modelDto);
         }
@@ -33,7 +33,7 @@ public class CoinServiceMemory implements CoinService {
     }
 
     @Override
-    public CoinDto getCoin(Integer id) {
+    public CoinDto getCoin(Long id) {
         return CoinConverter.toDto(repository.getCoin(id));
     }
 
@@ -43,7 +43,7 @@ public class CoinServiceMemory implements CoinService {
     }
 
     @Override
-    public void deleteCoin(Integer id) {
+    public void deleteCoin(Long id) {
         repository.deleteCoin(id);
     }
 

@@ -6,12 +6,12 @@ import java.util.HashMap;
 
 public interface WalletService {
 
-    HashMap<Integer, WalletDto> getWallets();
-    WalletDto getWallet(Integer id);
+    HashMap<Long, WalletDto> getWallets();
+    WalletDto getWallet(Long id);
 
     void createWallet(WalletDto WalletDao);
 
-    void deleteWallet(Integer id);
+    void deleteWallet(Long id);
 
-    void addCoinWallet(Integer id, Integer walletId);
+    void addCoinWallet(Long id, Long walletId);
 }

@@ -1,20 +1,18 @@
 package com.example.springCoinMarket.service;
 
 import com.example.springCoinMarket.dao.model.CoinWallet;
-import com.example.springCoinMarket.dao.repository.CoinWalletRepository;
+import com.example.springCoinMarket.dao.repository.CoinWalletMemoryRepository;
 import com.example.springCoinMarket.dto.CashInDto;
 import com.example.springCoinMarket.dto.CashOutDto;
-import com.example.springCoinMarket.dto.CoinDto;
-import com.example.springCoinMarket.dto.WalletDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BalanceService {
-    private final CoinWalletRepository repository;
+    private final CoinWalletMemoryRepository repository;
 
     @Autowired
-    public BalanceService(CoinWalletRepository repository) {
+    public BalanceService(CoinWalletMemoryRepository repository) {
         this.repository = repository;
     }
 
