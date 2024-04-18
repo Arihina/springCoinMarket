@@ -11,7 +11,6 @@ public class CoinWallet {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    // @Column(name = "coin_id")
     @Transient
     private Long coinId;
     @Column(name = "count_coin")

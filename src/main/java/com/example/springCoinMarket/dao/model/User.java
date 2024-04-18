@@ -20,7 +20,7 @@ public class User {
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "wallet_id")
+    @JoinColumn(name = "wallet_id", referencedColumnName = "id")
     private Wallet wallet;
 
     @Transient

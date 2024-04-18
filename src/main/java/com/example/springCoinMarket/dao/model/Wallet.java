@@ -13,24 +13,13 @@ import java.util.List;
 public class Wallet {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
     private List<CoinWallet> coinWallets = new ArrayList<>();
 
-    public void add(CoinWallet coinWallet)
-    {
-        coinWallets.add(coinWallet);
-        coinWallet.setWallet(this);
-    }
-
-    public void del(CoinWallet coinWallet)
-    {
-        coinWallets.remove(coinWallet);
-        coinWallet.setWallet(null);
-    }
 
     // @OneToMany(mappedBy = "id")
     // private List<Long> transactionIds;
