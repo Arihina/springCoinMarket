@@ -19,7 +19,6 @@ public class Coin {
     @Column(name = "currency")
     private String currency;
 
-    @OneToMany
-    @JoinColumn(name = "coin_id")
+    @OneToMany(mappedBy = "coin", cascade = CascadeType.ALL)
     private List<CoinWallet> coinWallets;
 }

@@ -9,7 +9,7 @@ public interface CoinWalletService {
 
     CoinWalletDto getCoinWallet(Long id);
 
-    void addCoinWallet(CoinWalletDto coinWalletDto);
+    void addCoinWallet(CoinWalletDto coinWalletDto, Long id);
 
     void deleteCoinWallet(Long id);
 

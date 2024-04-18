@@ -40,7 +40,7 @@ public class CoinWalletServiceMemory implements CoinWalletService {
     }
 
     @Override
-    public void addCoinWallet(CoinWalletDto coinWalletDto) {
+    public void addCoinWallet(CoinWalletDto coinWalletDto, Long id) {
         repository.addCoinWallet(CoinWalletConverter.toModel(coinWalletDto));
     }
 

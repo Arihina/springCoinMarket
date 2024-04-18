@@ -47,9 +47,6 @@ public class WalletServiceDb implements WalletService {
 
     @Override
     public void addCoinWallet(Long id, Long walletId) {
-        // TODO
-        var entity = new CoinWallet();
-        entity.setId(id);
-        coinWalletRepository.save(entity);
+
     }
 }
