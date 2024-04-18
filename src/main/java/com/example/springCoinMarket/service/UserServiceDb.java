@@ -53,6 +53,10 @@ public class UserServiceDb implements UserService {
     @Override
     @Transactional
     public void updateUser(UserDto userDto) {
-        repository.save(UserConverter.toModel(userDto));
+        var user = UserConverter.toModel(userDto);
+        var userOld = repository.findById(user.getId()).get();
+
+        userOld.setEmail(user.getEmail());
+        userOld.setName(user.getName());
     }
 }

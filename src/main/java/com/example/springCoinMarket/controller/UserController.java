@@ -13,12 +13,10 @@ import java.util.HashMap;
 public class UserController {
 
     private final UserService service;
-    private final WalletService walletService;
 
     @Autowired
-    public UserController(UserService service, WalletService walletService) {
+    public UserController(UserService service) {
         this.service = service;
-        this.walletService = walletService;
     }
 
     @GetMapping("/user")
