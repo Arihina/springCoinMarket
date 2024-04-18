@@ -30,7 +30,6 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable Long id) {
-        walletService.deleteWallet(getUser(id).getWalletId());
         service.deleteUser(id);
     }
 
