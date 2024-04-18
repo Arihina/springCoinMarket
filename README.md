@@ -24,6 +24,10 @@
     - Transfer conversion from services to a separate class (Dao -> Dto & Dto -> Dao)
     - Controller and service for depositing / debiting funds from the wallet
 
-## Planned 
+## Planned (Done)
 - Make:
   - connect the database
+
+## Planned 
+- Make:
+  - the system for receiving the current exchange rate

@@ -8,6 +8,7 @@ import com.example.springCoinMarket.dto.WalletDto;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 
@@ -16,8 +17,9 @@ import java.util.HashMap;
 @Primary
 public class WalletServiceDb implements WalletService {
     private final WalletRepository repository;
-    private final CoinWalletRepository coinWalletRepository;
+
     @Override
+    @Transactional(readOnly = true)
     public HashMap<Long, WalletDto> getWallets() {
         var wallets = repository.findAll();
         HashMap<Long, WalletDto> walletsDto = new HashMap<>();
@@ -31,22 +33,25 @@ public class WalletServiceDb implements WalletService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public WalletDto getWallet(Long id) {
         return WalletConverter.toDto(repository.getReferenceById(id));
     }
 
     @Override
+    @Transactional
     public void createWallet(WalletDto WalletDao) {
         repository.save(WalletConverter.toModel(WalletDao));
     }
 
     @Override
+    @Transactional
     public void deleteWallet(Long id) {
         repository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void addCoinWallet(Long id, Long walletId) {
-
     }
 }

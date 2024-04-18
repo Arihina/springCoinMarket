@@ -7,6 +7,7 @@ import com.example.springCoinMarket.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 
@@ -17,6 +18,7 @@ public class UserServiceDb implements UserService {
     private final UserRepository repository;
 
     @Override
+    @Transactional(readOnly = true)
     public HashMap<Long, UserDto> getUsers() {
         var users = repository.findAll();
         HashMap<Long, UserDto> usersDto = new HashMap<>();
@@ -30,22 +32,26 @@ public class UserServiceDb implements UserService {
     }
 
     @Override
+    @Transactional
     public void registerUser(UserDto userDto) {
         var user = UserConverter.toModel(userDto);
         repository.save(user);
     }
 
     @Override
+    @Transactional
     public void deleteUser(Long id) {
         repository.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDto getUser(Long id) {
         return UserConverter.toDto(repository.getReferenceById(id));
     }
 
     @Override
+    @Transactional
     public void updateUser(UserDto userDto) {
         repository.save(UserConverter.toModel(userDto));
     }

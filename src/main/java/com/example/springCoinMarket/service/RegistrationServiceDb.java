@@ -8,6 +8,7 @@ import com.example.springCoinMarket.dto.UserDto;
 import com.example.springCoinMarket.dto.WalletDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -15,6 +16,7 @@ public class RegistrationServiceDb {
     private final UserRepository userRepository;
     private final WalletRepository walletRepository;
 
+    @Transactional
     public void save(UserDto userDto) {
         WalletDto walletDto = WalletDto.builder().
                 id(userDto.getWalletId()).
