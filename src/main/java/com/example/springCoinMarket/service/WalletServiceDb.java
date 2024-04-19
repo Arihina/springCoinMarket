@@ -1,8 +1,6 @@
 package com.example.springCoinMarket.service;
 
 import com.example.springCoinMarket.converter.WalletConverter;
-import com.example.springCoinMarket.dao.model.CoinWallet;
-import com.example.springCoinMarket.dao.repository.CoinWalletRepository;
 import com.example.springCoinMarket.dao.repository.WalletRepository;
 import com.example.springCoinMarket.dto.WalletDto;
 import lombok.AllArgsConstructor;
