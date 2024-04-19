@@ -19,6 +19,6 @@ public class Coin {
     @Column(name = "currency")
     private String currency;
 
-    @OneToMany(mappedBy = "coin", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "coin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CoinWallet> coinWallets;
 }

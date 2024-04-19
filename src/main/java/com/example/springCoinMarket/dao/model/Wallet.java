@@ -17,8 +17,8 @@ public class Wallet {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
-    private List<CoinWallet> coinWallets = new ArrayList<>();
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CoinWallet> coinWallets;
 
 
     // @OneToMany(mappedBy = "id")

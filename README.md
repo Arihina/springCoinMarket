@@ -28,6 +28,6 @@
 - Make:
   - connect the database
 
-## Planned 
+## Planned (Done)
 - Make:
   - the system for receiving the current exchange rate
