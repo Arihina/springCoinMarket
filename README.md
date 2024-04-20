@@ -31,3 +31,11 @@
 ## Planned (Done)
 - Make:
   - the system for receiving the current exchange rate
+
+## Planned
+- Refactor:
+  - Add a new entity (and repository) - trading pairs of cryptocurrencies to the dollar
+  - Fill new entity and Coin entity
+  - Service with cryptocurrency
+- Make:
+  - Currency exchange between users
