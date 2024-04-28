@@ -1,5 +1,7 @@
 package com.example.springCoinMarket.service;
 
+import com.example.springCoinMarket.dao.model.TradingPair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,7 +36,11 @@ public class CryptocurrencyService {
             int indexStart = match.indexOf("{\"symbol\":\"");
             int indexEnd = match.indexOf("\",\"status\"");
 
-            currencies.add(match.substring(indexStart + "{\"symbol\":\"".length(), indexEnd));
+            var pair = match.substring(indexStart + "{\"symbol\":\"".length(), indexEnd);
+
+            if (pair.contains("USDT")) {
+                currencies.add(pair);
+            }
         }
 
         return currencies;

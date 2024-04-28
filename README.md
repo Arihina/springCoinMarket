@@ -35,7 +35,5 @@
 ## Planned
 - Refactor:
   - Add a new entity (and repository) - trading pairs of cryptocurrencies to the dollar
-  - Fill new entity and Coin entity
+  - Fill new entity
   - Service with cryptocurrency
-- Make:
-  - Currency exchange between users
