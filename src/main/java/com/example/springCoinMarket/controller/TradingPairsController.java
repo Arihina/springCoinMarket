@@ -25,13 +25,14 @@ public class TradingPairsController {
     }
 
     @PostMapping("/trading_pairs/adding")
-    public void addCoin(@RequestBody TradingPair tradingPair) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addPair(@RequestBody TradingPair tradingPair) {
         service.createTradingPair(tradingPair);
     }
 
     @DeleteMapping("/trading_pairs/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCoin(@PathVariable Integer id) {
+    public void deletePair(@PathVariable Integer id) {
         service.deleteTradingPair(id);
     }
 }

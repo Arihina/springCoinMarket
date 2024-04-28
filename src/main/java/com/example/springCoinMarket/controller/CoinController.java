@@ -29,6 +29,7 @@ public class CoinController {
     }
 
     @PostMapping("/coin/adding")
+    @ResponseStatus(HttpStatus.CREATED)
     public void addCoin(@RequestBody CoinDto coinDto) {
         service.addCoin(coinDto);
     }

@@ -39,6 +39,7 @@ public class CoinWalletController {
     }
 
     @PostMapping("/coin_wallet/{walletId}/registration")
+    @ResponseStatus(HttpStatus.CREATED)
     public void addCoinWallet(@RequestBody CoinWalletDto coinWalletDto, @PathVariable Long walletId) {
         service.addCoinWallet(coinWalletDto, walletId);
     }

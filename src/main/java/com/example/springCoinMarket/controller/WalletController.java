@@ -29,7 +29,6 @@ public class WalletController {
         return service.getWallet(id);
     }
 
-
     @DeleteMapping("/wallet/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteWallet(@PathVariable Long id) {
