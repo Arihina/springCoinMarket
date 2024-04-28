@@ -32,8 +32,7 @@
 - Make:
   - the system for receiving the current exchange rate
 
-## Planned
+## Planned (Done)
 - Refactor:
   - Add a new entity (and repository) - trading pairs of cryptocurrencies to the dollar
-  - Fill new entity
-  - Service with cryptocurrency
+  - Service to cryptocurrency

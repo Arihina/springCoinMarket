@@ -1,5 +1,6 @@
 package com.example.springCoinMarket.controller;
 
+import com.example.springCoinMarket.dao.model.TradingPair;
 import com.example.springCoinMarket.service.CryptocurrencyService;
 import com.example.springCoinMarket.service.FiatCurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 public class CryptocurrencyController {
@@ -25,7 +27,7 @@ public class CryptocurrencyController {
     }
 
     @GetMapping("/crypto")
-    public ArrayList<String> getCrypto() {
+    public HashMap<Integer, TradingPair> getCrypto() {
         return service.getCrypto();
     }
 }
