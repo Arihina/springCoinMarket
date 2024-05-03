@@ -36,3 +36,8 @@
 - Refactor:
   - Add a new entity (and repository) - trading pairs of cryptocurrencies to the dollar
   - Service to cryptocurrency
+
+## Planned
+- Make:
+  - new entity - Shop
+  - new entity - ExchangeLot
