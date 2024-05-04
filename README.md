@@ -37,7 +37,12 @@
   - Add a new entity (and repository) - trading pairs of cryptocurrencies to the dollar
   - Service to cryptocurrency
 
-## Planned
+## Planned (Done)
 - Make:
   - new entity - Shop
   - new entity - ExchangeLot
+
+## Planned
+- Refactor:
+  - ExchangeLot - find All rate
+  - Division in ExchangeLotService into cryptocurrency and fiat currency
