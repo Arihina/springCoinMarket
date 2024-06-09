@@ -1,4 +1,4 @@
-package com.example.springCoinMarket.Parser;
+package com.example.springCoinMarket.parser;
 
 import org.springframework.web.client.RestTemplate;
 

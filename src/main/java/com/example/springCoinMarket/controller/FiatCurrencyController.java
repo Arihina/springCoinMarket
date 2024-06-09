@@ -19,12 +19,12 @@ public class FiatCurrencyController {
     }
 
     @GetMapping("/fiat/price/{currency}")
-    public String getPrice(@PathVariable String currency) throws IOException {
+    public Double getPrice(@PathVariable String currency) throws IOException {
         return service.getPrice(currency);
     }
 
     @GetMapping("/fiat")
-    public HashMap<String, String> getFiat() throws IOException {
-        return service.getFiat();
+    public HashMap<String, Double> getFiat() throws IOException {
+        return service.getAllLots();
     }
 }

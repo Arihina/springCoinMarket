@@ -1,6 +1,7 @@
 package com.example.springCoinMarket.service;
 
 import com.example.springCoinMarket.dao.model.TradingPair;
+import com.example.springCoinMarket.parser.CryptoParser;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,5 +26,9 @@ public class CryptocurrencyService {
 
     public HashMap<Integer, TradingPair> getCrypto() {
         return service.getTradingPairs();
+    }
+
+    public HashMap<String, Double> getAllLots() {
+        return CryptoParser.getCryptoRate();
     }
 }
